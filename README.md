@@ -4,7 +4,8 @@
 
 1. Copy the folder mzehr.mod and all its content to \<BlitzMax installation directory\>/mod.
 2. Go to the \<BlitzMax installation directory\>/bin folder.
-3. Execute the bmk executable to build the module for your platform: "bmk makemods -a mzehr.net"
+3. Execute the bmk executable to build the module for your platform: `bmk makemods -a mzehr.ini`
+4. (Optional) Execute `docmods` to update the module documentation.
 
 ## INI format
 
