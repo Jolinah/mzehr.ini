@@ -15,12 +15,14 @@
 
 For example:
 
+```ini
 GlobalVar = Hello World
 [Video]
 ResolutionX = 1920
 ResoultionY = 1080
 []
 AnotherGlobalVar = true
+```
 
 ## Usage
 
