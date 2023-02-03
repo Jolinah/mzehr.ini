@@ -246,7 +246,14 @@ Type TIniFile
 		
 		Return group.SetValue(varName, value)
 	End Method
-                 
+
+	Rem
+	bbdoc: Sets a variable in the global group to the specified value.
+	End Rem
+	Method SetValue:TIniVar(varName:String, value:String)
+		Return SetValue("", varName, value)
+	End Method
+
 	Rem
 	bbdoc: Saves the INI to a file on disk.
 	about:
@@ -260,18 +267,21 @@ Type TIniFile
 			filePath = Path
 		End If
 	
-		Local s:TStream = WriteFile(filePath)
-		If s = Null Then Return
+		Local stream:TStream = WriteFile(filePath)
+		If stream = Null Throw "Could not open " + filePath + " for writing."
 
-		For Local g:TIniGroup = EachIn Groups.Values()
-			WriteLine(s, "[" + g.Name + "]")
-			For Local v:TIniVar = EachIn g.Vars
-				WriteLine(s, v.Name + " = " + v.Value)
-			Next
-			WriteLine(s, "")
-		Next
+		Save(stream)
        
-		CloseFile(s)
+		CloseFile(stream)
 		Path = filePath
+	End Method
+	
+	Rem
+	bbdoc: Saves/Writes the INI to the specified stream.
+	End Rem
+	Method Save(stream:TStream)
+		For Local g:TIniGroup = EachIn Groups.Values()
+			g.Save(stream, False)
+		Next
 	End Method
 End Type

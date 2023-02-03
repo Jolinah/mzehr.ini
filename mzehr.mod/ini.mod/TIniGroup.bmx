@@ -109,9 +109,25 @@ Type TIniGroup
 			v = TIniVar.Create(name, value)
 			Vars.Insert(name, v)
 		Else
-			v.value = value
+			v.Value = value
 		End If
 		
 		Return v
+	End Method
+
+	Rem
+	bbdoc: Saves/Writes the group to the specified stream.
+	about:
+	outputGlobalGroup - Whether the brackets [] will be output for the global group or not. Default is True. Save() from TIniFile uses False, however.
+	End Rem
+	Method Save(stream:TStream, outputGlobalGroup:Int = True)
+	
+		If outputGlobalGroup Or Name <> "" Then
+			WriteLine(stream, "[" + Name + "]")
+		End If
+		For Local v:TIniVar = EachIn Vars.Values()
+			v.Save(stream)
+		Next
+		WriteLine(stream, "")
 	End Method
 End Type

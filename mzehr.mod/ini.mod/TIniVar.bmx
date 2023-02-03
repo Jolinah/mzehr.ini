@@ -57,4 +57,11 @@ Type TIniVar
 	Method GetDouble:Double()
 		Return Double(value)
 	End Method
+	
+	Rem
+	bbdoc: Saves/Writes the name and value of the variable to the specified stream.
+	End Rem
+	Method Save(stream:TStream)
+		WriteLine(stream, Name + " = " + Value)
+	End Method
 End Type
